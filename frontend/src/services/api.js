@@ -80,4 +80,21 @@ export async function generateReport(fileId, format = 'pdf') {
     return response.data;
 }
 
+/**
+ * Build a full download URL from the backend's relative download_url.
+ * In dev: /api/reports/download/file.pdf  (Vite proxy handles it)
+ * In prod: https://autobi-backend.onrender.com/api/reports/download/file.pdf
+ */
+export function getDownloadUrl(backendPath) {
+    const apiBase = import.meta.env.VITE_API_URL;
+    if (apiBase) {
+        // Production: VITE_API_URL = https://...onrender.com/api
+        // backendPath  = /api/reports/download/file.pdf
+        // Result       = https://...onrender.com/api/reports/download/file.pdf
+        return backendPath.replace(/^\/api/, apiBase);
+    }
+    // Dev: relative path works via Vite proxy
+    return backendPath;
+}
+
 export default API;

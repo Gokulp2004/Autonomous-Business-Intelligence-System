@@ -27,7 +27,7 @@ import AnomalyReport from "../components/AnomalyReport";
 import CleaningReport from "../components/CleaningReport";
 import ForecastView from "../components/ForecastView";
 import InsightReport from "../components/InsightReport";
-import { generateInsights, generateReport, runAnalysis } from "../services/api";
+import { generateInsights, generateReport, getDownloadUrl, runAnalysis } from "../services/api";
 
 /* ── Reusable sub-components ─────────────────────────────── */
 
@@ -436,8 +436,8 @@ function AnalysisPage() {
     setReportLoading(format);
     try {
       const res = await generateReport(fileId, format);
-      // Open the download URL in a new tab
-      const url = res.download_url;
+      // Open the full download URL in a new tab
+      const url = getDownloadUrl(res.download_url);
       window.open(url, "_blank");
     } catch (err) {
       console.error(err);
