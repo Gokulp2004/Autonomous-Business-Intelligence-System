@@ -1,0 +1,29 @@
+# ═══════════════════════════════════════════════════════════
+#  Docker Compose — runs both frontend and backend together
+# ═══════════════════════════════════════════════════════════
+
+version: "3.8"
+
+services:
+  # ── Backend (FastAPI) ─────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: autobi-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/outputs:/app/outputs
+    restart: unless-stopped
+
+  # ── Frontend (React) ──────────────────────────────────────
+  frontend:
+    build: ./frontend
+    container_name: autobi-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

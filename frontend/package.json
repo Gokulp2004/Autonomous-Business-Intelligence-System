@@ -1,0 +1,30 @@
+{
+    "name": "autonomous-bi-frontend",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Autonomous Business Intelligence System — React Frontend",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.26.2",
+        "axios": "^1.7.7",
+        "plotly.js": "^2.35.2",
+        "react-plotly.js": "^2.6.0",
+        "react-dropzone": "^14.2.9",
+        "react-markdown": "^9.0.1",
+        "lucide-react": "^0.447.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.3.2",
+        "vite": "^5.4.8",
+        "tailwindcss": "^3.4.13",
+        "postcss": "^8.4.47",
+        "autoprefixer": "^10.4.20"
+    }
+}

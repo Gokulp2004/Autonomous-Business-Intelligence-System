@@ -1,0 +1,45 @@
+# ═══════════════════════════════════════════════════════════
+#  Render Blueprint — Infrastructure as Code
+#  Deploy both backend and frontend from one repo
+# ═══════════════════════════════════════════════════════════
+
+services:
+  # ── Backend (FastAPI) ─────────────────────────────────────
+  - type: web
+    name: autobi-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false           # Set manually in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: EXTRA_CORS_ORIGINS
+        value: https://autobi-frontend.onrender.com
+      - key: DEBUG
+        value: "false"
+    disk:
+      name: uploads
+      mountPath: /app/uploads
+      sizeGB: 1
+
+  # ── Frontend (React Static Site) ──────────────────────────
+  - type: web
+    name: autobi-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    plan: free
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://autobi-backend.onrender.com/api

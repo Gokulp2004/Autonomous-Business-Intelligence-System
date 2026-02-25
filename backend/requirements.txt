@@ -1,0 +1,35 @@
+# ═══════════════════════════════════════════════════════════════
+#  Autonomous BI System — Python Dependencies
+# ═══════════════════════════════════════════════════════════════
+
+# ── Web Framework ─────────────────────────────────────────────
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.12       # Required for file uploads
+
+# ── Configuration ─────────────────────────────────────────────
+pydantic-settings==2.5.2
+
+# ── Data Processing ───────────────────────────────────────────
+pandas==2.2.3
+numpy==1.26.4
+openpyxl==3.1.5                # Excel file support
+
+# ── Machine Learning & Statistics ─────────────────────────────
+scikit-learn==1.5.2
+scipy==1.14.1
+prophet==1.1.6                 # Time-series forecasting
+
+# ── Google Gemini SDK ─────────────────────────────────────────
+google-genai==1.0.0
+
+# ── Visualization ────────────────────────────────────────────
+plotly==5.24.1
+kaleido==0.2.1                 # For exporting Plotly charts to images
+
+# ── Report Generation ────────────────────────────────────────
+fpdf2==2.8.1                   # PDF generation
+python-pptx==1.0.2             # PowerPoint generation
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv==1.0.1
